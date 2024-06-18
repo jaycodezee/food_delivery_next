@@ -1,0 +1,111 @@
+/* Footer.module.css */
+
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footerContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+.footerSection {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 20px;
+}
+
+.footerSection h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.footerSection ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footerSection ul li {
+    margin-bottom: 10px;
+}
+
+.footerSection ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footerSection ul li a:hover {
+    color: #ff6347;
+    /* Change this color to match your theme */
+}
+
+.footerSection p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.subscribe {
+    background-color: #444;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.subscribe h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.subscribe form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.subscribe input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.subscribe button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0070f3;
+    /* Change this color to match your theme */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.subscribe button:hover {
+    background-color: #005bb5;
+    /* Change this color to match your theme */
+}
+
+.copyRight {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footerContent {
+        flex-direction: column;
+        align-items: center;
+    }
+}
