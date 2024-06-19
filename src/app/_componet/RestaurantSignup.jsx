@@ -1,10 +1,9 @@
 'use client'
-import { useRouter } from "next/navigation";
 import { useState } from 'react';
 import styles from '../styles/Signup.module.css';
 import { signIn } from 'next-auth/react';
 import Google from "./Google";
-
+import { useRouter } from "next/navigation";
 
 
 const Signup = () => {
@@ -21,6 +20,8 @@ const Signup = () => {
   });
 
   const [errors, setErrors] = useState({});
+  const router = useRouter();
+
 
   const validate = () => {
     const newErrors = {};
@@ -60,27 +61,24 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
-    const router = useRouter()
     e.preventDefault();
+
     if (validate()) {
-      try {
-        let response = await fetch("http://localhost:3000/api/restaurant", {
-          method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        });
-        response = await response.json();
-        if (response.success) {
-          console.log(response);    
-          const { result } = response;
-          delete result.password;
-          localStorage.setItem("restaurantUser", JSON.stringify(result))
-          router.push("/Restaurant/dashboard")
-        }
-      } catch (error) {
-        console.error('Error:', error);
+      // Example of handling the form data, replace with your actual form handling logic
+      const response = await fetch('http://localhost:3000/api/restaurant', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // Handle successful form submission, e.g., redirect or show success message
+        router.push('/Restaurant');
+      } else {
+        // Handle errors
+        console.error('Form submission failed');
       }
     }
   };

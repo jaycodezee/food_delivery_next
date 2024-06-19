@@ -1,4 +1,5 @@
 // components/Footer.js
+'use client';
 
 import { useState } from 'react';
 import styles from '../styles/Footer.module.css';

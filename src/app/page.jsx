@@ -1,6 +1,5 @@
 // import Image from "next/image";
 // import styles from "./page.module.css";
-import { signIn } from "./api/auth/auth" 
 
 
 export default function Home() {

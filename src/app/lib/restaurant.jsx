@@ -9,8 +9,8 @@ const restaurantModel = new mongoose.Schema({
     email: String,
     city: String,
     address: String,
-    pinCode: String,
-    restaurantContact: String,
+    pinCode: Number,
+    restaurantContact: Number,
 });
 
 export const restaurantSchema = mongoose.models.new
