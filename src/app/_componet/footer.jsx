@@ -50,7 +50,7 @@ const Footer = () => {
                 </div>
             </div>
             <div className={styles.subscribe}>
-                <h3>Subscribe to Our Newsletter</h3>
+                <h3>Subscribe Now</h3>
                 <form onSubmit={handleSubmit}>
                     <input
                         type="email"

@@ -11,6 +11,7 @@ const Restaurant = () => {
     return (
         <>
             <div className="container">
+                <title>Restaurant Login/Signup Page</title>
                 <RestaurantHeader />
                 <h1>Restaurant Login/Signup Page</h1>
                 <div className={styles.formContainer}>

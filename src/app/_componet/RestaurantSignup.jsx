@@ -1,10 +1,8 @@
 'use client'
 import { useState } from 'react';
 import styles from '../styles/Signup.module.css';
-import { signIn } from 'next-auth/react';
-import Google from "./Google";
 import { useRouter } from "next/navigation";
-
+import Google from "./Google";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -21,7 +19,6 @@ const Signup = () => {
 
   const [errors, setErrors] = useState({});
   const router = useRouter();
-
 
   const validate = () => {
     const newErrors = {};
@@ -64,21 +61,26 @@ const Signup = () => {
     e.preventDefault();
 
     if (validate()) {
-      // Example of handling the form data, replace with your actual form handling logic
-      const response = await fetch('http://localhost:3000/api/restaurant', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      try {
+        const response = await fetch('/api/restaurant', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
 
-      if (response.ok) {
-        // Handle successful form submission, e.g., redirect or show success message
-        router.push('/Restaurant');
-      } else {
-        // Handle errors
-        console.error('Form submission failed');
+        const data = await response.json();
+
+        if (data.success) {
+          router.push('/Restaurant');
+        } else if (data.message === 'Restaurant already registered') {
+          setErrors({ email: 'This Gmail is already registered' });
+        } else {
+          console.error('Form submission failed');
+        }
+      } catch (error) {
+        console.error('Form submission failed', error);
       }
     }
   };
@@ -91,7 +93,7 @@ const Signup = () => {
           <label>Owner Name:</label>
           <input
             type="text"
-            name="ownerName"  
+            name="ownerName"
             value={formData.ownerName}
             onChange={handleChange}
             required
@@ -189,7 +191,7 @@ const Signup = () => {
         <button className={styles.button} type="submit">Signup</button>
         <br />
       </form>
-      <Google/>
+      <Google />
     </div>
   );
 };

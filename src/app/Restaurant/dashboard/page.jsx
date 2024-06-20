@@ -10,12 +10,22 @@ function page() {
   return (
     <div>
       <RestaurantHeader />
-        
+        <title>Restaurant Dashboard</title>
         <button onClick={() => setAddItem(true)} >Add Food </button>
         <button onClick={() => setAddItem(false)}>Dashboard</button>
         {
             addItem ? <AddFoodItems setAddItem={setAddItem} /> : <FoodItemList />
         }
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
           <Footer />
     </div>
   )
