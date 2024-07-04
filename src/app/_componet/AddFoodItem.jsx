@@ -43,7 +43,7 @@ const AddFoodItems = (props) => {
                 setTimeout(() => {
                     setSuccessMessage("");
                     props.setAddItem(false);
-                }, 2000);
+                }, 1500);
             } else {
                 setError(response.errors || { general: "Food item not added" });
             }

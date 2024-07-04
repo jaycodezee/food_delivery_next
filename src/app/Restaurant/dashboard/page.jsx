@@ -10,6 +10,7 @@ function page() {
   return (
     <div>
       <RestaurantHeader />
+      <link rel="icon" href="/icon.png"  />
         <title>Restaurant Dashboard</title>
         <button onClick={() => setAddItem(true)} >Add Food </button>
         <button onClick={() => setAddItem(false)}>Dashboard</button>
