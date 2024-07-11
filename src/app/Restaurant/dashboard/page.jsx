@@ -5,12 +5,20 @@ import Footer from "../../_componet/footer";
 import { useState } from "react";
 import AddFoodItems from '@/app/_componet/AddFoodItem';
 import FoodItemList from '@/app/_componet/FoodItemList'
+import useAuth from '../../_hooks/useAuth';
+
 function page() {
   const [addItem, setAddItem] = useState(false)
+  const authenticated = useAuth();
+
+  if (!authenticated) {
+      return null; 
+  }
+
   return (
     <div>
       <RestaurantHeader />
-      <link rel="icon" href="/icon.png"/>
+      {/* <link rel="icon" href="/icon.png"/> */}
         <title>Restaurant Dashboard</title>
         <button onClick={() => setAddItem(true)} >Add Food </button>
         <button onClick={() => setAddItem(false)}>Dashboard</button>

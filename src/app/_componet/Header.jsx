@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Cookies from 'js-cookie';
 import styles from '../styles/Header.module.css';
 
 const Header = () => {
@@ -10,14 +11,14 @@ const Header = () => {
     const router = useRouter();
 
     useEffect(() => {
-        const user = localStorage.getItem("restaurantUser");
+        const user = Cookies.get("restaurantUser");
         if (user) {
             setIsAuthenticated(true);
         }
     }, []);
 
     const logout = () => {
-        localStorage.removeItem("restaurantUser");
+        Cookies.remove("restaurantUser");
         setIsAuthenticated(false);
         router.push("/Restaurant");
     };
@@ -46,7 +47,7 @@ const Header = () => {
                     {isAuthenticated ? (
                         <>
                             <li className={styles.navItem}>
-                                <Link href="/Restaurant" className={styles.navLink}>
+                                <Link href="/Restaurant/dashboard" className={styles.navLink}>
                                     Profile
                                 </Link>
                             </li>

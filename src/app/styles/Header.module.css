@@ -1,5 +1,3 @@
-/* styles/Header.module.css */
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -70,6 +68,10 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+    }
+
+    .nav.open {
+        display: flex;
     }
 
     .navList {
