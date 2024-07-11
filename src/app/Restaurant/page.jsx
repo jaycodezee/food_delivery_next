@@ -16,7 +16,7 @@ const Restaurant = () => {
     return (
        
             <div className="container">
-            <link rel="icon" href="/icon.png"  />
+            <link rel="icon" href="/icon.png"/>
                 <title>Restaurant Login/Signup Page</title>
                 <RestaurantHeader />
                 <h1>Restaurant Login/Signup Page</h1>

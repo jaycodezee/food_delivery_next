@@ -1,11 +1,12 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link'; // Import Link component from next/link
+import Link from 'next/link';
 import styles from '../styles/Header.module.css';
 
 const Header = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
@@ -21,12 +22,21 @@ const Header = () => {
         router.push("/Restaurant");
     };
 
+    const toggleMenu = () => {
+        setIsOpen(!isOpen);
+    };
+
     return (
         <header className={styles.header}>
             <div className={styles.logo}>
                 <img src="/image.png" alt="Logo" />
             </div>
-            <nav className={styles.nav}>
+            <div className={styles.hamburger} onClick={toggleMenu}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav className={`${styles.nav} ${isOpen ? styles.open : ''}`}>
                 <ul className={styles.navList}>
                     <li className={styles.navItem}>
                         <Link href="/" className={styles.navLink}>
