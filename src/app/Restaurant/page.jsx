@@ -18,7 +18,7 @@ const Restaurant = () => {
     return (
             <div className="container">
                 <title>Restaurant Login/Signup Page</title>
-                {/* <link rel="icon" href="/icon.png"/> */}
+                {/* <link rel="icon" href="/favicon.ico"/> */}
                 <RestaurantHeader />
                 <h1>Restaurant Login/Signup Page</h1>
                 <div className={styles.formContainer}>

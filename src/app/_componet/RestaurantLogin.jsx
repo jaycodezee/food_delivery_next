@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styles from '../styles/Login.module.css';
 import { useRouter } from "next/navigation";
-import Cookies from 'js-cookie';
 
 const RestaurantLogin = () => {
     const [email, setEmail] = useState('');
@@ -28,10 +27,10 @@ const RestaurantLogin = () => {
             setError({ email: false, password: false });
         }
 
-        setLoading(true); // Set loading state to true
+        setLoading(true); 
 
         try {
-            console.log("Starting login request"); // Log start
+            // console.log("Starting login request"); // Log start
             let response = await fetch("http://localhost:3000/api/restaurant", {
                 method: 'POST',
                 headers: {
@@ -41,16 +40,17 @@ const RestaurantLogin = () => {
             });
 
             response = await response.json();
-            console.log("Login request completed"); // Log end
+            // console.log("Login request completed", response);
 
             if (response.success) {
                 const { result } = response;
                 delete result.password;
-                // Set the user data in cookies
-                Cookies.set("restaurantUser", JSON.stringify(result), { expires: 1 }); // expires in 1 days
+                // console.log("Storing user in localStorage", result);
+                localStorage.setItem("restaurantUser",JSON.stringify(result));
+                console.log("Redirecting to /Restaurant/dashboard");
                 router.push("/Restaurant/dashboard");
-            } else {
-                alert("PLZ Signup your Restureant In ");
+            }else {
+                alert("Eneter valid email or password ")
             }
         } catch (error) {
             console.error("Login error:", error);

@@ -11,16 +11,19 @@ const Header = () => {
     const router = useRouter();
 
     useEffect(() => {
-        const user = Cookies.get("restaurantUser");
+        const user = localStorage.getItem("restaurantUser");
         if (user) {
             setIsAuthenticated(true);
         }
     }, []);
 
     const logout = () => {
-        Cookies.remove("restaurantUser");
+        localStorage.removeItem("restaurantUser");
         setIsAuthenticated(false);
         router.push("/Restaurant");
+        setTimeout(() => {
+            window.location.reload(false); // Reload the page after a delay
+        }, 300);
     };
 
     const toggleMenu = () => {
