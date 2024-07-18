@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* <link rel="icon" href="/icon.png"/> */}
+      <link rel="icon" href="/icon.png"/>
       <body className={inter.className}>{children}</body>
     </html>
   );

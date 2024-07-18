@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import styles from '../styles/Login.module.css';
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation'; 
 
 const RestaurantLogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState({ email: false, password: false });
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const validateEmail = (email) => {
@@ -16,7 +16,7 @@ const RestaurantLogin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         const emailError = !validateEmail(email);
         const passwordError = !password;
 
@@ -27,40 +27,38 @@ const RestaurantLogin = () => {
             setError({ email: false, password: false });
         }
 
-        setLoading(true); 
+        setLoading(true);
 
         try {
-            let response = await fetch("http://localhost:3000/api/restaurant", {
+            let response = await fetch('http://localhost:3000/api/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email, password, login: true }),
+                body: JSON.stringify({ email, password }),
             });
 
             response = await response.json();
-            // console.log("Login request completed", response);
 
             if (response.success) {
                 const { result } = response;
-                delete result.password;
-                localStorage.setItem("restaurantUser",JSON.stringify(result));
-                console.log("Redirecting to /Restaurant/dashboard");
-                router.push("/Restaurant/dashboard");
-            }else {
-                alert("Eneter valid email or password ")
+                localStorage.setItem('userdata', JSON.stringify(result));
+                router.push('/');
+            } else {
+                alert('Invalid email or password'); 
             }
         } catch (error) {
-            console.error("Login error:", error);
-            alert("An error occurred during login. Please try again.");
+            console.error('Login error:', error);
+            alert('An error occurred during login. Please try again.');
         } finally {
-            setLoading(false); // Reset loading state
+            setLoading(false);
         }
     };
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Login</h1>
+            <title>User login</title>
+            <h1 className={styles.title}>User Login</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
                 <div className={styles.inputGroup}>
                     <label>Email:</label>
@@ -70,7 +68,7 @@ const RestaurantLogin = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className={styles.input}
-                        disabled={loading} // Disable input when loading
+                        disabled={loading}
                     />
                     {error.email && <span className={styles.error}>Please enter a valid email</span>}
                 </div>
@@ -82,7 +80,7 @@ const RestaurantLogin = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className={styles.input}
-                        disabled={loading} // Disable input when loading
+                        disabled={loading}
                     />
                     {error.password && <span className={styles.error}>Please enter a valid password</span>}
                 </div>

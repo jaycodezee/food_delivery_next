@@ -53,7 +53,7 @@ const FoodItemList = () => {
 
     return (
         <div>
-            <h1>Food Items</h1>
+            <h1>Food Items List</h1>
             <table>
                 <thead>
                     <tr>

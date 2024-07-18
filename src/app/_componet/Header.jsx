@@ -20,7 +20,7 @@ const Header = () => {
     const logout = () => {
         localStorage.removeItem("restaurantUser");
         setIsAuthenticated(false);
-        router.push("/Restaurant");
+        router.push("/");
         setTimeout(() => {
             window.location.reload(false); // Reload the page after a delay
         }, 300);
