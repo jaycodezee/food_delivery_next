@@ -9,10 +9,9 @@ export default function Home() {
   const router = useRouter();
   const [selectedLocation, setSelectedLocation] = useState('');
   const [showLocation, setShowLocation] = useState(false);
-  // const [restaurants, setRestaurants] = useState([]);
-  // const [locations, setLocations] = useState([]);
+  const [restaurants, setRestaurants] = useState([]);
+  const [locations, setLocations] = useState([]);
 
-  // Function to handle selecting a location
   const handleListItem = (location) => {
     setSelectedLocation(location);
     setShowLocation(false);
@@ -23,7 +22,7 @@ export default function Home() {
   return (
     <main>
       <CustmoreHeader />
-    <title>Home</title>
+      <title>Home</title>
       <div className={styles.mainpagebanner}>
         <h1>Food Delivery App</h1>
         <div className={styles.inputwrapper}>
@@ -34,14 +33,14 @@ export default function Home() {
             className={styles.selectinput}
             placeholder="Select Place"
           />
-          {/* <ul className={styles.locationlist}>
+          <ul className={styles.locationlist}>
             {showLocation &&
               locations.map((item, index) => (
                 <li key={index} onClick={() => handleListItem(item)}>
                   {item}
                 </li>
               ))}
-          </ul> */}
+          </ul>
           <input
             type="text"
             className={styles.searchinput}
@@ -50,7 +49,7 @@ export default function Home() {
           />
         </div>
       </div>
-{/* 
+      {/* 
       <div className={styles.restaurantlistcontainer}>
         {restaurants.map((item) => (
           <div

@@ -1,4 +1,3 @@
-// components/Footer.js
 'use client';
 
 import { useState } from 'react';
@@ -13,9 +12,7 @@ const Footer = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle subscription logic here, such as sending the email to your backend
         console.log("Subscribed with email:", email);
-        // Clear the input field after submission
         setEmail('');
     };
 

@@ -39,7 +39,6 @@ const RestaurantLogin = () => {
             });
 
             response = await response.json();
-            // console.log("Login request completed", response);
 
             if (response.success) {
                 const { result } = response;
@@ -54,7 +53,7 @@ const RestaurantLogin = () => {
             console.error("Login error:", error);
             alert("An error occurred during login. Please try again.");
         } finally {
-            setLoading(false); // Reset loading state
+            setLoading(false); 
         }
     };
 
@@ -70,7 +69,7 @@ const RestaurantLogin = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className={styles.input}
-                        disabled={loading} // Disable input when loading
+                        disabled={loading} 
                     />
                     {error.email && <span className={styles.error}>Please enter a valid email</span>}
                 </div>
@@ -82,7 +81,7 @@ const RestaurantLogin = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className={styles.input}
-                        disabled={loading} // Disable input when loading
+                        disabled={loading} 
                     />
                     {error.password && <span className={styles.error}>Please enter a valid password</span>}
                 </div>

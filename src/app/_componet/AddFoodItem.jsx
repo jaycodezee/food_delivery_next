@@ -46,7 +46,7 @@ const AddFoodItems = (props) => {
                 setTimeout(() => {
                     setSuccessMessage('');
                     props.setAddItem(false);
-                    router.push('/Restaurant/dashboard'); // Adjust the path as needed
+                    router.push('/Restaurant/dashboard'); 
                 }, 1500);
             } else {
                 setError(response.errors || { general: 'Food item not added' });
@@ -57,7 +57,6 @@ const AddFoodItems = (props) => {
         }
     };
 
-    // Function to check if a string is a valid URL
     const isValidURL = (url) => {
         try {
             new URL(url);

@@ -1,17 +1,29 @@
 'use client'
 import Link from 'next/link';
-import { useState } from 'react'; 
+import { useState,useEffect } from 'react'; 
 import styles from '../styles/CustmoreHeader.module.css'
+import { useRouter } from 'next/navigation';
 
 const CustmoreHeader = () => {
-    const [user, setUser] = useState(null); 
+    // const [user, setUser] = useState(null); 
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const cartNumber = 3; 
-   
-    const logout = () => {
-        localStorage.removeItem('user');
-        router.push('/user-auth')
-    };
+    const router = useRouter();
 
+    useEffect(() => {
+        const user = localStorage.getItem("userdata");
+        if (user) {
+            setIsAuthenticated(true);
+        }
+    }, []);
+    const logout = () => {
+        localStorage.removeItem("userdata");
+        setIsAuthenticated(false);
+        router.push("/");
+        setTimeout(() => {
+            window.location.reload(false); 
+        }, 300);
+    };
     return (
     <div>
        <header className={styles.header}>
@@ -31,12 +43,16 @@ const CustmoreHeader = () => {
                    </Link>
                </li>
                {
-                user ?
+                isAuthenticated ?
                     <>
                         <li className={styles.navItem}>
-                            <Link href="/myprofile"  className={styles.navLink} >{user.name}</Link>
+                            <Link href="/myprofile"  className={styles.navLink} >profile</Link>
                         </li>
-                        <li className={styles.navItem}><button onClick={logout}>Logout</button></li>
+                        <li className={styles.navItem}>
+                                <span onClick={logout} className={styles.navLink} style={{ cursor: 'pointer' }}>
+                                    Logout
+                                </span>
+                            </li>
                     </>
                     :
                     <>

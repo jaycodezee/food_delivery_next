@@ -4,8 +4,6 @@ import { useRouter } from 'next/navigation';
 import '../../../styles/AddFoodItems.css';
 
 const EditFoodItems = (props) => {
-  
-  // console.log(props.params.id);
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [path, setPath] = useState("");
@@ -66,7 +64,6 @@ const EditFoodItems = (props) => {
         }
     };
 
-    // Function to check if a string is a valid URL
     const isValidURL = (url) => {
         try {
             new URL(url);

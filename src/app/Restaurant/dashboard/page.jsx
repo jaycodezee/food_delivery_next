@@ -13,11 +13,11 @@ import Stack from '@mui/material/Stack';
 
 function page() {
   const [addItem, setAddItem] = useState(false)
-  // const authenticated = useAuth();
+  const authenticated = useAuth();
 
-  // if (!authenticated) {
-  //     return null; 
-  // }
+  if (!authenticated) {
+      return null; 
+  }
 
   return (
     <div>

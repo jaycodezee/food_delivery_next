@@ -22,7 +22,7 @@ const Header = () => {
         setIsAuthenticated(false);
         router.push("/");
         setTimeout(() => {
-            window.location.reload(false); // Reload the page after a delay
+            window.location.reload(false); 
         }, 300);
     };
 
@@ -43,7 +43,7 @@ const Header = () => {
             <nav className={`${styles.nav} ${isOpen ? styles.open : ''}`}>
                 <ul className={styles.navList}>
                     <li className={styles.navItem}>
-                        <Link href="/" className={styles.navLink}>
+                        <Link href="/Restaurant" className={styles.navLink}>
                             Home
                         </Link>
                     </li>

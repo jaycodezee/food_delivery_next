@@ -1,4 +1,3 @@
-// RestaurantSignup.js (or your signup component file)
 'use client'
 import { useState } from 'react';
 import styles from '../styles/Signup.module.css';
@@ -74,7 +73,7 @@ const Signup = ({ onSignupSuccess }) => {
 
         if (data.success) {
           // console.log('Signup successful, redirecting...');
-          onSignupSuccess(); // Call the prop function
+          onSignupSuccess(); 
         } else if (data.message === 'Restaurant already registered') {
           setErrors({ email: 'This Gmail is already registered' });
         } else {

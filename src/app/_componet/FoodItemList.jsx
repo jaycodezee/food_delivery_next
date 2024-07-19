@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from "next/navigation"; // Correct import for Next.js
+import { useRouter } from "next/navigation"; 
 import { useEffect, useState } from "react";
 import '../styles/FooditemList.css';
 

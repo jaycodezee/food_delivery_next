@@ -12,7 +12,7 @@ const Restaurant = () => {
     const [login, setLogin] = useState(true);
 
     const handleSignupSuccess = () => {
-        setLogin(true); // Switch to login form after successful signup
+        setLogin(true); 
     };
 
     return (
