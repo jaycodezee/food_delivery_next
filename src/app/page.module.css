@@ -6,6 +6,7 @@ padding: 30px;
 background-color: rgba(0, 0, 0, 0.7);
 background-blend-mode: multiply;
 color: #fff;
+border-collapse: collapse;
 }
 
 .mainpagebanner h1 {
@@ -46,6 +47,7 @@ color: #fff;
 .locationlist li {
   cursor: pointer;
   padding: 5px 10px;
+  color: black;
 }
 
 .restaurantlistcontainer {
@@ -65,28 +67,30 @@ color: #fff;
 .restaurantwrapper:hover {
   background-color: #f0f0f0;
 }
-
 .headingwrapper {
   margin-bottom: 10px;
 }
 
 .headingwrapper h3 {
   font-size: 1.5rem;
+  margin: 0;
 }
 
 .headingwrapper h5 {
   font-size: 1rem;
   color: #666;
+  margin: 5px 0 0;
 }
 
 .addresswrapper {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   font-size: 0.9rem;
   color: #666;
 }
 
 .addresswrapper .address {
-  margin-left: 5px;
+  margin-top: 5px;
 }
 

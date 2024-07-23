@@ -72,12 +72,12 @@ const Signup = ({ onSignupSuccess }) => {
         const data = await response.json();
 
         if (data.success) {
-          // console.log('Signup successful, redirecting...');
+          alert('Signup successful');
           onSignupSuccess(); 
         } else if (data.message === 'Restaurant already registered') {
           setErrors({ email: 'This Gmail is already registered' });
         } else {
-          console.error('Form submission failed');
+          alert('Form submission failed');
         }
       } catch (error) {
         console.error('Form submission failed', error);

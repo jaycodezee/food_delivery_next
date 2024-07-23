@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import RestaurantHeader from "../../_componet/Header";
 import Footer from "../../_componet/footer";
+import RestaurantHeader from "../../_componet/Header";
 import { useState } from "react";
 import AddFoodItems from '@/app/_componet/AddFoodItem';
 import FoodItemList from '@/app/_componet/FoodItemList'
@@ -21,9 +21,9 @@ function page() {
 
   return (
     <div>
-      <RestaurantHeader />
       {/* <link rel="icon" href="/icon.png"/> */}
       <title>Restaurant Dashboard</title>
+      <RestaurantHeader />
       {
         addItem ? <AddFoodItems setAddItem={setAddItem} /> : <FoodItemList />
       }
@@ -37,7 +37,7 @@ function page() {
       <br />
       <br />
       <br />
-      <Footer />
+      <Footer/>
     </div>
   )
 }

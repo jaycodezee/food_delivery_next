@@ -1,9 +1,8 @@
 'use client'
 import { useState } from "react"
-import CustomerHeader from "../_componet/CustmoreHeader"
-import Footer from "../_componet/footer"
-import UserLogin from "../_componet/UserLogin.jsx"
-import UserSignUp from "../_componet/UserSignUp.jsx"
+import Footer from "../_componet/footer.js"
+import UserLogin from "../_componet/UserLogin.js"
+import UserSignUp from "../_componet/UserSignUp.js"
 import styles from "../styles/Restaurant.module.css";
 
 const user=()=>{
@@ -14,7 +13,6 @@ const user=()=>{
     };
     return(
         <>
-            <CustomerHeader />  
             {/* <h1>Login/Signup Page</h1> */}
                 <div className={styles.formContainer}>
                     {login ? <UserSignUp /> : <UserLogin onSignupSuccess={handleSignupSuccess} />}

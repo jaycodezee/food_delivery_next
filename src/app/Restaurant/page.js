@@ -1,12 +1,10 @@
 'use client'
 import { useState } from "react";
+import RestaurantHeader from "../_componet/Header";
 import RestaurantLogin from "../_componet/RestaurantLogin";
 import RestaurantSignup from "@/app/_componet/RestaurantSignup";
-import RestaurantHeader from "../_componet/Header";
-import Footer from "../_componet/footer";
 import styles from "../styles/Restaurant.module.css";
-import Head from 'next/head';
-
+import Footer from "../_componet/footer"
 
 const Restaurant = () => {
     const [login, setLogin] = useState(true);
@@ -18,7 +16,6 @@ const Restaurant = () => {
     return (
             <div className="container">
                 <title>Restaurant Login/Signup Page</title>
-                {/* <link rel="icon" href="/favicon.ico"/> */}
                 <RestaurantHeader />
                 <h1>Restaurant Login/Signup Page</h1>
                 <div className={styles.formContainer}>

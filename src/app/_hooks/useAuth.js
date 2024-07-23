@@ -8,7 +8,8 @@ const useAuth = () => {
     const router = useRouter();
 
     useEffect(() => {
-        const user = Cookies.get("restaurantUser");
+        // const user = Cookies.get("restaurantUser");
+        const user = JSON.parse(localStorage.getItem('restaurantUser'));
         if (user) {
             setAuthenticated(true);
         } else {

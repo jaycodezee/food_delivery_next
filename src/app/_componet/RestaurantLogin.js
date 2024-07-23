@@ -44,7 +44,6 @@ const RestaurantLogin = () => {
                 const { result } = response;
                 delete result.password;
                 localStorage.setItem("restaurantUser",JSON.stringify(result));
-                console.log("Redirecting to /Restaurant/dashboard");
                 router.push("/Restaurant/dashboard");
             }else {
                 alert("Eneter valid email or password ")

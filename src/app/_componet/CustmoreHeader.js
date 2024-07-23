@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 const CustmoreHeader = () => {
     // const [user, setUser] = useState(null); 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const cartNumber = 3; 
+    const cartNumber = 0; 
     const router = useRouter();
 
     useEffect(() => {
@@ -16,6 +16,7 @@ const CustmoreHeader = () => {
             setIsAuthenticated(true);
         }
     }, []);
+    
     const logout = () => {
         localStorage.removeItem("userdata");
         setIsAuthenticated(false);
