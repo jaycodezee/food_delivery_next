@@ -2,28 +2,33 @@
 import CustmoreHeader from "@/app/_componet/CustmoreHeader";
 import { useEffect, useState } from "react";
 import styles from "@/app/styles/explorePage.module.css";  
+import axios from "axios";
 
 const Page = (props) => {
     const name = props.params.name;
     const [restaurantDetails, setRestaurantDetails] = useState();
     const [foodItems, setFoodItems] = useState([]);
-    const [cartData, setCartData] = useState();
+    // const [cartData, setCartData] = useState();
     // const [cartStorage, setCartStorage] = useState(JSON.parse(localStorage.getItem('cart')));
     // const [cartIds, setCartIds] = useState(cartStorage ? () => cartStorage.map((cartItem) => cartItem._id) : []);
-    const [removeCartData, setRemoveCartData] = useState();
+    // const [removeCartData, setRemoveCartData] = useState();
+    // console.log('hiiiiiiii :>> ');
 
     useEffect(() => {
-        loadRestaurantDetails();
+            loadRestaurantDetails();
     }, []);
 
     const loadRestaurantDetails = async () => {
         const id = props.searchParams.id;
-        let response = await fetch("http://localhost:3000/api/customer/" + id);
-        response = await response.json();
-        if (response.success) {
-            setRestaurantDetails(response.details);
-            setFoodItems(response.foodItems);
+        // console.log('id', id)
+        let response = await axios.get("/api/customer/" + id);
+        // console.log("new",response)
+        // response = await response.json();
+        if (response.data.success) {
+            setRestaurantDetails(response.data.details);
+            setFoodItems(response.data.foodItems);
         }
+
     };
 
     // const addToCart = (item) => {

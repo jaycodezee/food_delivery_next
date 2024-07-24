@@ -3,6 +3,7 @@ import CustmoreHeader from "./_componet/CustmoreHeader";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.css";
+import axios from "axios";
 
 export default function Home() {
   const router = useRouter();
@@ -18,16 +19,17 @@ export default function Home() {
 
   const loadLocations = async () => {
     let response = await fetch("/api/customer/locations");
-    response = await response.json();
+    // console.log('response :>> ', response);
+
     if (response.success) {
-      setLocations(response.result);
+      setLocations(response.data.res);
     }
   };
 
 
   const loadRestaurants = async (params) => {
     // console.log(params)
-    let url="http://localhost:3000/api/customer";
+    let url="/api/customer";
     if(params?.location){
       url=url+"?location="+params.location
     }else if(params?.restaurant){
