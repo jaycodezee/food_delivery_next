@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 // Create a connection function to reuse the connection
 async function connectToDatabase() {
-    console.log('connection :>> ',mongoose.connection.readyState);
+    // console.log('connection :>> ',mongoose.connection.readyState);
     if (!mongoose.connection.readyState) {
         // console.log("object")
         await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });

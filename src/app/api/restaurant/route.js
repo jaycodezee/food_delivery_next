@@ -40,28 +40,38 @@ export async function POST(request) {
     return NextResponse.json({ result, success });
 }
 
-// export async function DELETE(request, content) {
-//     const id = content.params.id;
-//     const loggedInUserId = request.headers.get('Authorization'); // Example: Get authenticated user ID from headers
+
+// export async function DELETE(request) {
+//     const token = request.headers.get('Authorization')?.replace('Bearer ', '') // Extract token from header
+
+//     if (!token) {
+//         return NextResponse.json({ message: 'Authorization token is missing', success: false }, { status: 401 })
+//     }
 
 //     try {
-//         await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+//         // Verify token and extract userId from it (Implement this function based on your auth setup)
+//         const loggedInUserId = await verifyToken(token)
 
-//         const restaurant = await restaurantSchema.findOne({ _id: id, userId: loggedInUserId });
-
-//         if (!restaurant) {
-//             return NextResponse.json({ message: 'Restaurant not found or unauthorized', success: false }, { status: 403 });
+//         if (!loggedInUserId) {
+//             return NextResponse.json({ message: 'Invalid', success: false }, { status: 401 })
 //         }
 
-//         const result = await restaurantSchema.findByIdAndDelete(id);
+//         const result = await restaurantSchema.findOneAndDelete({ userId: loggedInUserId })
 
 //         if (result) {
-//             return NextResponse.json({ message: 'Restaurant deleted successfully', success: true });
+//             return NextResponse.json({ message: 'Account deleted successfully', success: true })
 //         } else {
-//             return NextResponse.json({ message: 'Failed to delete restaurant', success: false });
+//             return NextResponse.json({ message: 'Failed to delete account', success: false })
 //         }
 //     } catch (error) {
-//         console.error("Error deleting restaurant:", error);
-//         return NextResponse.json({ message: 'Failed to delete restaurant', success: false });
+//         console.error("Error deleting account:", error)
+//         return NextResponse.json({ message: 'Failed to delete account', success: false })
 //     }
+// }
+
+// async function verifyToken(token) {
+//     // Example verification logic
+//     // Replace this with your actual token verification logic
+//     // This is just a placeholder
+//     return token === 'valid-token' ? 'user-id-from-token' : null
 // }

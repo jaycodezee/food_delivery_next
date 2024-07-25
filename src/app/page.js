@@ -19,30 +19,27 @@ export default function Home() {
 
   const loadLocations = async () => {
     let response = await fetch("/api/customer/locations");
-    // console.log('response :>> ', response);
-
-    if (response.success) {
-      setLocations(response.data.res);
+    const data = await response.json(); // Add this line to parse JSON
+    if (data.success) {
+      setLocations(data.result); // Fix response key
     }
   };
 
-
   const loadRestaurants = async (params) => {
-    // console.log(params)
-    let url="/api/customer";
-    if(params?.location){
-      url=url+"?location="+params.location
-    }else if(params?.restaurant){
-      url=url+"?restaurant="+params.restaurant
+    let url = "/api/customer";
+    if (params?.location) {
+      url = url + "?location=" + params.location;
+    } else if (params?.restaurant) {
+      url = url + "?restaurant=" + params.restaurant;
     }
     let response = await fetch(url);
     response = await response.json();
     if (response.success) {
-      setRestaurants(response.result)
+      setRestaurants(response.result);
     } else {
       console.error("Failed to load restaurants:", response.message);
     }
-  }
+  };
 
   const handleListItem = (item) => {
     setSelectedLocation(item);
@@ -60,6 +57,7 @@ export default function Home() {
           <input
             type="text"
             value={selectedLocation}
+            onChange={(event) => setSelectedLocation(event.target.value)} // Add onChange handler
             onClick={() => setShowLocation(true)}
             className={styles.selectinput}
             placeholder="Select Place"
@@ -75,8 +73,8 @@ export default function Home() {
           <input
             type="text"
             className={styles.searchinput}
-            onChange={(event) => loadRestaurants({restaurant:event.target.value})}
-            placeholder="Enter food or restaurant name"
+            onChange={(event) => loadRestaurants({ restaurant: event.target.value })} // Add onChange handler
+            placeholder="Enter Location or Restaurant name"
           />
         </div>
       </div>
@@ -85,21 +83,22 @@ export default function Home() {
         {restaurants.map((item) => (
           <div
             key={item._id}
-            onClick={() => router.push(`/explore/${item.name}?id=${item._id}`)}
+            onClick={() => router.push('explore/'+item.restaurantName+"?id="+item._id)}
             className={styles.restaurantwrapper}
           >
             <div className={styles.headingwrapper}>
               <h3>{item.restaurantName}</h3>
-              <br/>
+              <br />
               <h5>Contact: {item.restaurantContact}</h5>
+              <h5>City: {item.city}</h5>
             </div>
             <div className={styles.addresswrapper}>
+              <div className="address">Location : {item.address}</div>
               <div className="address">Email: {item.email}</div>
             </div>
           </div>
         ))}
       </div>
-      {/* <Footer /> */}
     </main>
   );
 }

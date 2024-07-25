@@ -18,13 +18,10 @@ export async function GET(request) {
       filter = { restaurantName: { $regex: new RegExp(name, "i") } };
     }
 
-    console.log("Filter:", filter); // Log the filter being applied
-
     // Check if the client is already connected
     async function connectToDatabase() {
-      // console.log('connection :>> ',mongoose.connection);
       if (!mongoose.connection.readyState) {
-        console.log('helo :>> ');
+        // console.log('helo :>> ');
           await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
       }
   }
@@ -33,7 +30,7 @@ export async function GET(request) {
   await connectToDatabase()
 
     let result = await restaurantSchema.find(filter);
-    // console.log("Result:", result); // Log the fetched result
+    // console.log("Result:", result); 
 
     return NextResponse.json({ success: true, result });
   } catch (error) {

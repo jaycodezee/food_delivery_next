@@ -43,7 +43,7 @@ const RestaurantLogin = () => {
             if (response.success) {
                 const { result } = response;
                 localStorage.setItem('userdata', JSON.stringify(result));
-                router.push('/');
+                router.push('/cart');
             } else {
                 alert('Invalid email or password'); 
             }

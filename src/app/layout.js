@@ -1,20 +1,19 @@
 import { Inter } from "next/font/google";
-// import "./globals.css";
+import { CartProvider } from './_componet/CartContext'; 
 
 const inter = Inter({ subsets: ["latin"] });
-
-// export const metadata = {
-//   icons: {
-//     icon: "/public/icon.png",
-//   },
-// };
-
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <link rel="icon" href="/icon.png"/>
-      <body className={inter.className}>{children}</body>
+      <head>
+        <link rel="icon" href="/icon.png" />
+      </head>
+      <body className={inter.className}>
+        <CartProvider>
+          {children}
+        </CartProvider>
+      </body>
     </html>
   );
 }

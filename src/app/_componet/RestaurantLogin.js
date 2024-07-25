@@ -38,6 +38,10 @@ const RestaurantLogin = () => {
                 body: JSON.stringify({ email, password, login: true }),
             });
 
+            if (!response.ok) {
+                throw new Error('Network response was not ok')
+            }
+            
             response = await response.json();
 
             if (response.success) {

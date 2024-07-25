@@ -21,11 +21,13 @@ const Header = () => {
         localStorage.removeItem("restaurantUser");
         setIsAuthenticated(false);
         router.push("/");
-        setTimeout(() => {
-            window.location.reload(false); 
-        }, 300);
+        // setTimeout(() => {
+        //     window.location.reload(false); 
+        // }, 300);
     };
-
+    const deleteacc =()=>{
+        router.push("/delete-account")
+    }
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
@@ -43,7 +45,7 @@ const Header = () => {
             <nav className={`${styles.nav} ${isOpen ? styles.open : ''}`}>
                 <ul className={styles.navList}>
                     <li className={styles.navItem}>
-                        <Link href="/Restaurant" className={styles.navLink}>
+                        <Link href="/" className={styles.navLink}>
                             Home
                         </Link>
                     </li>
@@ -58,6 +60,11 @@ const Header = () => {
                                 <span onClick={logout} className={styles.navLink} style={{ cursor: 'pointer' }}>
                                     Logout
                                 </span>
+                            </li>
+                            <li className={styles.navItem}>
+                                <Link href="/Restaurant/delete-account" className={styles.navLink}>
+                                Delete Account
+                                </Link>
                             </li>
                         </>
                     ) : (
