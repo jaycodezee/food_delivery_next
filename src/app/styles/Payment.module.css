@@ -1,0 +1,32 @@
+.paymentContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.paymentMethods {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.paymentButton {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.paymentButton:hover {
+  background-color: #45a049;
+}
+
+.paymentStatus {
+  margin-top: 10px;
+  font-size: 1.2em;
+  color: #4caf50;
+}

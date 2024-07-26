@@ -1,7 +1,7 @@
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
-import styles from '../styles/CheckoutForm.module.css'; // Adjust path as needed
+import styles from '../styles/CheckoutForm.module.css'; 
 
 const CheckoutForm = ({ cartItems, totalAmount }) => {
   const router = useRouter()

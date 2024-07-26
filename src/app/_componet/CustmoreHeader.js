@@ -40,6 +40,7 @@ const CustmoreHeader = (props) => {
 
   const logout = () => {
     localStorage.removeItem('userdata');
+    localStorage.removeItem('cart');
     setIsAuthenticated(false);
     router.push('/');
   };
@@ -64,7 +65,7 @@ const CustmoreHeader = (props) => {
               isAuthenticated ?
                 <>
                   <li className={styles.navItem}>
-                    <Link href="/" className={styles.navLink}>Profile</Link>
+                    <Link href="/Profile" className={styles.navLink}>Profile</Link>
                   </li>
                   <li className={styles.navItem}>
                     <span onClick={logout} className={styles.navLink} style={{ cursor: 'pointer' }}>Logout</span>

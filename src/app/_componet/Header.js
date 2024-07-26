@@ -51,11 +51,11 @@ const Header = () => {
                     </li>
                     {isAuthenticated ? (
                         <>
-                            <li className={styles.navItem}>
+                            {/* <li className={styles.navItem}>
                                 <Link href="/Restaurant/dashboard" className={styles.navLink}>
                                     Profile
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className={styles.navItem}>
                                 <span onClick={logout} className={styles.navLink} style={{ cursor: 'pointer' }}>
                                     Logout
