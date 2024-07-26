@@ -26,7 +26,7 @@ const ProfilePage = () => {
         const data = await response.json();
         if (data.success) {
           setOrders(data.orders);
-          
+          // console.log('data', data)
           const foodItemIds = data.orders.flatMap(order => order.foodItemIds);
           
           const foodResponse = await fetch('/api/foodItems', {
@@ -82,8 +82,8 @@ const ProfilePage = () => {
                     const item = foodItems[itemId];
                     return (
                       <li key={itemId} className={styles.foodItem}>
+                        <h4>{item?.name}</h4>
                         <img src={item?.img_path} alt={item?.name} className={styles.foodItemImage} />
-                        <p>{item?.name}</p>
                       </li>
                     );
                   })}

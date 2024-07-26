@@ -61,12 +61,12 @@ const UserSignup = () => {
         });
 
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         if (data.success) {
           // Handle successful signup
           localStorage.setItem('user', JSON.stringify(data.result));
-          router.push('/'); // Redirect to homepage or dashboard after successful signup
+          router.push('/cart'); // Redirect to homepage or dashboard after successful signup
         } else {
           // Handle signup failure
           if (data.message === 'Email already registered') {

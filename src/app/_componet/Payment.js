@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import styles from '../styles/Payment.module.css';
 import { useRouter } from 'next/navigation';
-
+import { useCart } from '../_componet/CartContext';
 
 const Payment = ({ cartItems, totalAmount }) => {
-  const router = useRouter()
+  const router = useRouter();
+  const { clearCart } = useCart(); // Use clearCart
   const [paymentStatus, setPaymentStatus] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
 
   const handlePayment = async () => {
     const restoId = cartItems.length > 0 ? cartItems[0].resto_id : null;
-    const userid= JSON.parse(localStorage.getItem('userdata'))
+    const userid = JSON.parse(localStorage.getItem('userdata'));
     if (!paymentMethod) {
       setPaymentStatus('Please select a payment method.');
       return;
@@ -18,10 +19,10 @@ const Payment = ({ cartItems, totalAmount }) => {
 
     try {
       const orderDetails = {
-        user_id: userid._id, 
+        user_id: userid._id,
         foodItemIds: cartItems.map(item => item._id),
-        resto_id: restoId, 
-        deliveryBoy_id: null, 
+        resto_id: restoId,
+        deliveryBoy_id: null,
         amount: totalAmount,
       };
 
@@ -36,8 +37,9 @@ const Payment = ({ cartItems, totalAmount }) => {
       const data = await response.json();
       if (data.success) {
         setPaymentStatus('Order placed successfully!');
+        clearCart(); 
         setTimeout(() => {
-          router.push('/')
+        router.push('/Profile');
         }, 500);
       } else {
         setPaymentStatus(`Error placing order: ${data.error}`);

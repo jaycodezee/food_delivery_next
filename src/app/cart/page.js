@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState } from "react";
 import { useCart } from "../_componet/CartContext";
 import Payment from '../_componet/Payment';
@@ -49,56 +49,12 @@ const CartPage = () => {
               </div>
             </div>
           ))}
-          {/* <div className={styles.totalAmountContainer}>
-            <div className={styles.orderAmount}>
-              <h2>Order Amount: ₹{orderAmount.toFixed(2)}</h2>
-            </div>
-            <div className={styles.deliveryCharge}>
-              <h2>Delivery Charge: ₹{deliveryCharge.toFixed(2)}</h2>
-            </div>
-            <div className={styles.gstAmount}>
-              <h2>GST (18%): ₹{gstAmount.toFixed(2)}</h2>
-            </div>
-            <div className={styles.totalAmount}>
-              <h2>Total Amount: ₹{totalAmount.toFixed(2)}</h2>
-            </div>
-          </div>
-          <div className={styles.paymentMethodContainer}>
-            <h2>Select Payment Method:</h2>
-            <div className={styles.paymentMethods}>
-              <label>
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="card"
-                  checked={paymentMethod === 'card'}
-                  onChange={handlePaymentMethodChange}
-                />
-                Card
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="upi"
-                  checked={paymentMethod === 'upi'}
-                  onChange={handlePaymentMethodChange}
-                />
-                UPI
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="cash"
-                  checked={paymentMethod === 'cash'}
-                  onChange={handlePaymentMethodChange}
-                />
-                Cash on Delivery
-              </label>
-            </div>
-          </div> */}
-          <Payment cartItems={cartItems} totalAmount={totalAmount} paymentMethod={paymentMethod} />
+          <Payment
+            cartItems={cartItems}
+            totalAmount={totalAmount}
+            paymentMethod={paymentMethod}
+            removeFromCart={removeFromCart}  
+          />
         </div>
       )}
     </main>
