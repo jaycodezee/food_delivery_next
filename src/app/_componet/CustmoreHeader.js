@@ -85,7 +85,8 @@ const CustmoreHeader = (props) => {
               <Link href="/Restaurant" className={styles.navLink}>Add Restaurant</Link>
             </li>
             <li className={styles.navItem}>
-              <Link href="/deliverypartner" className={styles.navLink}>Delivery Partner</Link>
+              <Link href="/" className={styles.navLink}>Delivery Partner</Link>
+              {/* <Link href="/deliverypartner" className={styles.navLink}>Delivery Partner</Link> */}
             </li>
           </ul>
         </nav>
