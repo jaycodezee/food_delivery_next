@@ -4,6 +4,7 @@ import styles from '../styles/Profile.module.css';
 import { useRouter } from 'next/navigation';
 import CustomerHeader from "../_componet/CustmoreHeader";
 import { useAuth } from '../_hooks/userauth';
+import {Spinner} from "@nextui-org/react";
 
 const ProfilePage = () => {
   useAuth()
@@ -60,7 +61,7 @@ const ProfilePage = () => {
     fetchOrders();
   }, [router]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return   <Spinner  label="loading" />
   if (error) return <p>Error: {error}</p>;
 
   return (
@@ -75,10 +76,11 @@ const ProfilePage = () => {
             {orders.map(order => (
               <div key={order._id} className={styles.orderItem}>
                 <h2>Order ID: {order._id}</h2>
+                <br/>
                 <p>Time: {order.createdAt}</p>
                 <p>Delivery Boy ID: {order.deliveryBoy_id}</p>
                 <p>Status: {order.status}</p>
-                <p>Amount: ₹{order.amount}</p>
+                <p>Total Amount: ₹{order.amount}</p>
                 <ul>
                   {order.foodItemIds.map(itemId => {
                     const item = foodItems[itemId];

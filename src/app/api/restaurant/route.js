@@ -15,7 +15,7 @@ export async function POST(request) {
     let success = false;
 
     await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
-
+    
     if (payload.login) {
         result = await restaurantSchema.findOne({ email: payload.email, password: payload.password });
         if (result) {
@@ -41,37 +41,29 @@ export async function POST(request) {
 }
 
 
-// export async function DELETE(request) {
-//     const token = request.headers.get('Authorization')?.replace('Bearer ', '') // Extract token from header
+export async function DELETE(request) {
+    
+    try {
+        const token = request.headers.get('Authorization')?.replace('Bearer ', '') // Extract token from header
+        
+        if (!token) {
+            return NextResponse.json({ message: 'Authorization token is missing', success: false }, { status: 401 })
+        }
+        
+        await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+        // Verify token and extract userId from it (Implement this function based on your auth setup)
+        const loggedInUserId = token
 
-//     if (!token) {
-//         return NextResponse.json({ message: 'Authorization token is missing', success: false }, { status: 401 })
-//     }
+        const result = await restaurantSchema.findOneAndDelete({ _id: loggedInUserId })
 
-//     try {
-//         // Verify token and extract userId from it (Implement this function based on your auth setup)
-//         const loggedInUserId = await verifyToken(token)
+        if (result) {
+            return NextResponse.json({ message: 'Account deleted successfully', success: true })
+        } else {
+            return NextResponse.json({ message: 'Failed to delete account', success: false })
+        }
+    } catch (error) {
+        console.error("Error deleting account:", error)
+        return NextResponse.json({ message: 'Failed to delete account', success: false })
+    }
+}
 
-//         if (!loggedInUserId) {
-//             return NextResponse.json({ message: 'Invalid', success: false }, { status: 401 })
-//         }
-
-//         const result = await restaurantSchema.findOneAndDelete({ userId: loggedInUserId })
-
-//         if (result) {
-//             return NextResponse.json({ message: 'Account deleted successfully', success: true })
-//         } else {
-//             return NextResponse.json({ message: 'Failed to delete account', success: false })
-//         }
-//     } catch (error) {
-//         console.error("Error deleting account:", error)
-//         return NextResponse.json({ message: 'Failed to delete account', success: false })
-//     }
-// }
-
-// async function verifyToken(token) {
-//     // Example verification logic
-//     // Replace this with your actual token verification logic
-//     // This is just a placeholder
-//     return token === 'valid-token' ? 'user-id-from-token' : null
-// }

@@ -4,10 +4,16 @@ import { useRouter } from "next/navigation";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styles from "../../styles/DeleteAccount.module.css";
+import HomeIcon from '@mui/icons-material/Home';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 function DeleteAccount() {
   const router = useRouter();
 
+  const backtohome =async ()=>{
+    router.push('/Restaurant/dashboard')
+  }
+  
   const handleDelete = async () => {
     if (
       window.confirm(
@@ -15,14 +21,12 @@ function DeleteAccount() {
       )
     ) {
       try {
-        // Retrieve the token from localStorage
         const token = localStorage.getItem("restaurantUser");
 
         if (!token) {
           alert("Authorization token is missing");
           return;
         }
-
         const response = await fetch("/api/restaurant", {
           method: "DELETE",
           headers: {
@@ -32,7 +36,7 @@ function DeleteAccount() {
         });
 
         if (response.ok) {
-          // Redirect to login or home page after successful deletion
+          // console.log('response', response)
           router.push("/Restaurant");
         } else {
           // Handle error
@@ -40,7 +44,7 @@ function DeleteAccount() {
           alert(`Failed to delete account: ${errorData.message}`);
         }
       } catch (error) {
-        console.error("Error deleting account:", error);
+        console.error("Error deleting :", error);
         alert("An error occurred. Please try again.");
       }
     }
@@ -59,6 +63,16 @@ function DeleteAccount() {
         >
           <DeleteIcon />
         </IconButton>
+        <br/>
+        <IconButton
+          aria-label="delete"
+          size="large"
+          onClick={backtohome}
+        >
+          <HomeIcon fontSize="large"/>
+          <KeyboardBackspaceIcon fontSize="large"/>
+        </IconButton>
+        
       </div>
     </div>
   );

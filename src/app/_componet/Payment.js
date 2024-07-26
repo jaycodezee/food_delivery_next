@@ -38,6 +38,7 @@ const Payment = ({ cartItems, totalAmount }) => {
       if (data.success) {
         setPaymentStatus('Order placed successfully!');
         clearCart(); 
+        localStorage.removeItem("cart")
         setTimeout(() => {
         router.push('/Profile');
         }, 500);
@@ -52,7 +53,7 @@ const Payment = ({ cartItems, totalAmount }) => {
   return (
     <div className={styles.paymentContainer}>
       <div className={styles.paymentMethods}>
-        <label>
+        {/* <label>
           <input
             type="radio"
             name="paymentMethod"
@@ -69,7 +70,7 @@ const Payment = ({ cartItems, totalAmount }) => {
             onChange={() => setPaymentMethod('upi')}
           />
           UPI
-        </label>
+        </label> */}
         <label>
           <input
             type="radio"
