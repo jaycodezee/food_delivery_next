@@ -31,7 +31,7 @@ const AddFoodItems = (props) => {
         }
 
         try {
-            let response = await fetch('http://localhost:3000/api/restaurant/food', {
+            let response = await fetch('/api/restaurant/food', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

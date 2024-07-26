@@ -18,7 +18,7 @@ const FoodItemList = () => {
 
     const loadFoodItems = async (resto_id) => {
         try {
-            let response = await fetch("http://localhost:3000/api/restaurant/food/" + resto_id);
+            let response = await fetch("/api/restaurant/food/" + resto_id);
             response = await response.json();
             if (response.success) {
                 setFoodItems(response.result);
@@ -33,7 +33,7 @@ const FoodItemList = () => {
 
     const deleteFoodItem = async (id) => {
         try {
-            let response = await fetch(`http://localhost:3000/api/restaurant/food/${id}`, {
+            let response = await fetch(`/api/restaurant/food/${id}`, {
                 method: 'DELETE'
             });
             response = await response.json();

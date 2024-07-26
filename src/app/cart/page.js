@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useCart } from "../_componet/CartContext";
 import Payment from '../_componet/Payment';
-import { useAuth } from '../utils/auth'; 
+import { useAuth } from '../_hooks/userauth'
 import styles from "../styles/Cart.module.css"; 
 import CustomerHeader from "../_componet/CustmoreHeader";
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styles from '../styles/Profile.module.css'; 
 import { useRouter } from 'next/navigation';
 import CustomerHeader from "../_componet/CustmoreHeader";
-import { useAuth } from '../utils/auth';
+import { useAuth } from '../_hooks/userauth';
 
 const ProfilePage = () => {
   useAuth()

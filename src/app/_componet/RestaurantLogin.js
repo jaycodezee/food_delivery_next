@@ -30,7 +30,7 @@ const RestaurantLogin = () => {
         setLoading(true); 
 
         try {
-            let response = await fetch("http://localhost:3000/api/restaurant", {
+            let response = await fetch("/api/restaurant", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
