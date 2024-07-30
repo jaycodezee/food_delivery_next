@@ -1,8 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import RestaurantHeader from "../../../_componet/Header";
 import '../../../styles/AddFoodItems.css';
-
 const EditFoodItems = (props) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -75,6 +75,7 @@ const EditFoodItems = (props) => {
 
     return (
         <div className='container'>
+            <RestaurantHeader />
             <h1>Edit Food Item</h1>
             <div className='input-wrapper'>
                 <input

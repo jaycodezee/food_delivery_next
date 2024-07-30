@@ -1,19 +1,33 @@
 import { connectionStr } from "@/app/lib/db";
-import mongoose from "mongoose";
-import Order from "@/app/lib/Order"; 
+import { NextResponse } from "next/server";
+import mongoose from 'mongoose';
+import Order from '@/app/lib/Order';  
+import FoodItem from '@/app/lib/food';
 
-export async function GET(request) {
-  await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+export async function GET() {
+  await mongoose.connect(connectionStr, { useNewUrlParser: true });
+
+  async function connectToDatabase() {
+    if (!mongoose.connection.readyState) {
+            await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+    }
+}
+
+await connectToDatabase()
 
   try {
-    const orders = await Order.find({});
-    return new Response(JSON.stringify({ success: true, data: orders }), {
-      headers: { 'Content-Type': 'application/json' },
-    });
+    const orders = await Order.find({})
+      .populate({path:'user_id', 
+        select:'name mobile address'}) 
+      .populate({
+        path: 'foodItemIds',
+        select :'name '
+      })
+      .exec();
+
+    return NextResponse.json({ success: true, orders });
   } catch (error) {
     console.error("Error fetching orders:", error);
-    return new Response(JSON.stringify({ success: false, message: "Error fetching orders" }), {
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return NextResponse.json({ success: false, message: "An error occurred while fetching orders" });
   }
 }

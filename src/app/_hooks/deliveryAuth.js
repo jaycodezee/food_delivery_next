@@ -1,20 +1,18 @@
 // hooks/useAuth.js
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
 
-const useAuth = () => {
+const deliveryAuth = () => {
     const [authenticated, setAuthenticated] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
-        // const user = Cookies.get("restaurantUser");
-        const user = JSON.parse(localStorage.getItem('restaurantUser'));
+        const user = JSON.parse(localStorage.getItem('deliveryBoy'));
         if (user) {
             setAuthenticated(true);
         } else {
             setAuthenticated(false);
-            router.push('/Restaurant'); 
+            router.push('/deliverypartner'); 
             // setTimeout(() => {
             //     window.location.reload(false); 
             // }, 500);
@@ -24,4 +22,4 @@ const useAuth = () => {
     return authenticated;
 };
 
-export default useAuth;
+export default deliveryAuth;

@@ -13,7 +13,6 @@ const user=()=>{
     }; 
     return(
         <>
-            {/* <h1>Login/Signup Page</h1> */}
             <DeliveryHeader />
                 <div className={styles.formContainer}>
                     {login ? <DeliveryBoySignup /> : <DeliveryBoyLogin onSignupSuccess={handleSignupSuccess} />}

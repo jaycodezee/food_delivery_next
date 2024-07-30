@@ -28,6 +28,7 @@ const DeliveryBoySignup = () => {
 
   return (
     <div className={styles.container}>
+      <title>DeliveryBoy Signup</title>
       <h1 className={styles.title}>DeliveryBoy Signup</h1>
       <div className={styles.form}>
         <div className={styles.inputGroup}>

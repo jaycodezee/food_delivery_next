@@ -44,7 +44,7 @@ const DeliveryHeader = () => {
               isAuthenticated ?
                 <>
                   <li className={styles.navItem}>
-                    <Link href="/deliverypartner/dashboard" className={styles.navLink}>Profile</Link>
+                    <Link href="/deliverypartner/dashboard" className={styles.navLink}>Dashboard</Link>
                   </li>
                   <li className={styles.navItem}>
                     <span onClick={logout} className={styles.navLink} style={{ cursor: 'pointer' }}>Logout</span>

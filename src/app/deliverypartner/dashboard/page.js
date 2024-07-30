@@ -1,20 +1,22 @@
 "use client"
 import { useEffect, useState } from 'react';
-import React from 'react'
-import DeliveryHeader from '../../_componet/deliveryHeader'
-import styles from '../../styles/deliveryDashboard.module.css'
+import React from 'react';
+import DeliveryHeader from '../../_componet/deliveryHeader';
+import styles from '../../styles/deliveryDashboard.module.css';
+import deliveryAuth from '../../_hooks/deliveryAuth'
 
-function page() {
+function Page() {
   const [orders, setOrders] = useState([]);
   const [message, setMessage] = useState('');
-
+  const authenticated = deliveryAuth();
+  
   useEffect(() => {
     const fetchOrders = async () => {
       const response = await fetch('/api/orders');
       const data = await response.json();
-      console.log('data :>> ', data);
+      console.log('data :>> ', orders);
       if (data.success) {
-        setOrders(data.data);
+        setOrders(data.orders); 
       } else {
         setMessage('Error fetching orders');
       }
@@ -22,7 +24,12 @@ function page() {
 
     fetchOrders();
   }, []);
-
+  
+  
+    if (!authenticated) {
+        return null; 
+    }
+    
   const handleAcceptOrder = async (orderId) => {
     const response = await fetch(`/api/orders/${orderId}/accept`, {
       method: 'POST',
@@ -53,22 +60,42 @@ function page() {
     <div>
       <DeliveryHeader />
       <div className={styles.container}>
-      <h1 className={styles.title}>Delivery Partner Dashboard</h1>
-      <p>{message}</p>
-      <div className={styles.orders}>
-        {orders.map(order => (
-          <div key={order._id} className={styles.order}>
-            <p>Order ID: {order._id}</p>
-            <p>Customer: {order.Name}</p>
-            <p>Status: {order.status}</p>
-            <button onClick={() => handleAcceptOrder(order._id)} className={styles.acceptButton}>Accept</button>
-            <button onClick={() => handleCancelOrder(order._id)} className={styles.cancelButton}>Cancel</button>
-          </div>
-        ))}
+        <title>Delivery Partner Dashboard</title>
+        <h1 className={styles.title}>Delivery Partner Dashboard</h1>
+        <p>{message}</p>
+        <div className={styles.orders}>
+          {orders.length === 0 ? (
+            <p>No orders available.</p>
+          ) : (
+            orders.map(order => (
+              <div key={order._id} className={styles.order}>
+                <p>Order ID: {order._id}</p>
+                <br />
+                <p>Customer: {order.user_id?.name || 'Unknown'}</p>
+                <p>Mobile: {order.user_id?.mobile || 'Unknown'}</p>
+                <p>Address: {order.user_id?.address || 'Unknown'}</p>
+                <p>Status: {order.status}</p>
+                <div>
+                  <h3>Food Items:</h3>
+                  <ul>
+                    {order.foodItemIds?.length > 0 ? (
+                      order.foodItemIds.map(foodItem => (
+                        <li key={foodItem._id}>{foodItem.name}</li>
+                      ))
+                    ) : (
+                      <li>No food items</li>
+                    )}
+                  </ul>
+                </div>
+                <button onClick={() => handleAcceptOrder(order._id)} className={styles.acceptButton}>Accept</button>
+                <button onClick={() => handleCancelOrder(order._id)} className={styles.cancelButton}>Cancel</button>
+              </div>
+            ))
+          )}
+        </div>
       </div>
     </div>
-    </div>
-  )
+  );
 }
 
-export default page
+export default Page;

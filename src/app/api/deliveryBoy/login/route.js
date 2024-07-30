@@ -4,6 +4,14 @@ import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
+    async function connectToDatabase() {
+        if (!mongoose.connection.readyState) {
+                await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+        }
+    }
+    
+    await connectToDatabase()
+    
     const payload = await request.json();
     let success = false;
     await mongoose.connect(connectionStr, { useNewUrlParser: true });

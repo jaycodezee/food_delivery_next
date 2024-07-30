@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 import { restaurantSchema } from "@/app/lib/restaurant";
+import { foodSchema } from "@/app/lib/food";
 import { connectionStr } from "@/app/lib/db";
+import jwt from 'jsonwebtoken'; 
+require('dotenv').config();
 
 export async function GET() {
     await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -40,30 +43,22 @@ export async function POST(request) {
     return NextResponse.json({ result, success });
 }
 
-
-export async function DELETE(request) {
-    
+export async function DELETE(req) {
     try {
-        const token = request.headers.get('Authorization')?.replace('Bearer ', '') // Extract token from header
-        
-        if (!token) {
-            return NextResponse.json({ message: 'Authorization token is missing', success: false }, { status: 401 })
-        }
-        
+        const { _id } = await req.json();
+
         await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
-        // Verify token and extract userId from it (Implement this function based on your auth setup)
-        const loggedInUserId = token
-
-        const result = await restaurantSchema.findOneAndDelete({ _id: loggedInUserId })
-
+        
+        const result = await restaurantSchema.findByIdAndDelete(_id);
         if (result) {
-            return NextResponse.json({ message: 'Account deleted successfully', success: true })
+            await foodSchema.deleteMany({ resto_id: _id });
+
+            return NextResponse.json({ message:'Account and associated food items deleted successfully', success: true });
         } else {
-            return NextResponse.json({ message: 'Failed to delete account', success: false })
+            return NextResponse.json({ message: 'Failed to delete account', success: false });
         }
     } catch (error) {
-        console.error("Error deleting account:", error)
-        return NextResponse.json({ message: 'Failed to delete account', success: false })
+        console.error("Error deleting account:", error);
+        return NextResponse.json({ message: 'Failed to delete account', success: false });
     }
 }
-

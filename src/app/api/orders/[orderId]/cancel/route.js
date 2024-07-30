@@ -6,8 +6,16 @@ export async function POST(request, { params }) {
   const { orderId } = params;
   await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
 
+  async function connectToDatabase() {
+    if (!mongoose.connection.readyState) {
+            await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+    }
+}
+
+await connectToDatabase()
+
   try {
-    const order = await Order.findByIdAndUpdate(orderId, { status: 'Accepted' }, { new: true });
+    const order = await Order.findByIdAndUpdate(orderId, { status: 'Canceled' }, { new: true });
     return new Response(JSON.stringify({ success: true, data: order }), {
       headers: { 'Content-Type': 'application/json' },
     });
