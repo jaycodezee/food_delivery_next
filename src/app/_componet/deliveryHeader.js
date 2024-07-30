@@ -1,45 +1,24 @@
-"use client"
-import { useCart } from './CartContext'; 
+"use client" 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from '../styles/CustmoreHeader.module.css';
 
-const CustmoreHeader = (props) => {
-    // console.log('props :>> ', props);
-  const { cartItems, cartNumber, addToCart, removeFromCart } = useCart();
+const DeliveryHeader = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
+//   const [user, setUser] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
-    const user = localStorage.getItem("userdata");
+    const user = localStorage.getItem("deliveryBoy");
     if (user) {
       setIsAuthenticated(true);
     }
-    const userStorage = JSON.parse(localStorage.getItem('user'));
-    setUser(userStorage);
   }, []);
 
-  useEffect(() => {
-    if (props.cartData) {
-      if (cartItems.length && cartItems[0].resto_id !== props.cartData.resto_id) {
-        localStorage.removeItem('cart');
-        addToCart(props.cartData);
-      } else {
-        addToCart(props.cartData);
-      }
-    }
-  }, [props.cartData]);
-
-  useEffect(() => {
-    if (props.removeCartData) {
-      removeFromCart(props.removeCartData);
-    }
-  }, [props.removeCartData]);
 
   const logout = () => {
-    localStorage.removeItem('userdata');
+    localStorage.removeItem('deliveryBoy');
     localStorage.removeItem('cart');
     setIsAuthenticated(false);
     router.push('/');
@@ -65,7 +44,7 @@ const CustmoreHeader = (props) => {
               isAuthenticated ?
                 <>
                   <li className={styles.navItem}>
-                    <Link href="/Profile" className={styles.navLink}>Profile</Link>
+                    <Link href="/deliverypartner/dashboard" className={styles.navLink}>Profile</Link>
                   </li>
                   <li className={styles.navItem}>
                     <span onClick={logout} className={styles.navLink} style={{ cursor: 'pointer' }}>Logout</span>
@@ -74,19 +53,13 @@ const CustmoreHeader = (props) => {
                 :
                 <>
                   <li className={styles.navItem}>
-                    <Link href="/user" className={styles.navLink}>Login/SignUp</Link>
+                    <Link href="/deliverypartner" className={styles.navLink}>Login/SignUp</Link>
                   </li>
                 </>
             }
             <li className={styles.navItem}>
-              <Link href={cartNumber ? "/cart" : "#"} className={styles.navLink}>Cart({cartNumber})</Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link href="/Restaurant" className={styles.navLink}>Add Restaurant</Link>
-            </li>
-            <li className={styles.navItem}>
               {/* <Link href="/" className={styles.navLink}>Delivery Partner</Link> */}
-              <Link href="/deliverypartner" className={styles.navLink}>Delivery Partner</Link>
+              {/* <Link href="/" className={styles.navLink}>Delivery Partner</Link> */}
             </li>
           </ul>
         </nav>
@@ -95,4 +68,4 @@ const CustmoreHeader = (props) => {
   );
 };
 
-export default CustmoreHeader;
+export default DeliveryHeader;
