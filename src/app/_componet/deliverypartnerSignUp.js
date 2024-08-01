@@ -17,7 +17,7 @@ const DeliveryBoySignup = () => {
       body: JSON.stringify({ username, email, password }),
     });
     const data = await response.json();
-    console.log('data :>> ', data);
+    // console.log('data :>> ', data);
     if (data.success) {
       setMessage('Signup successful!');
       router.push('/deliverypartner');

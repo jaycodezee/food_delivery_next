@@ -3,6 +3,18 @@ import { deliverySchema } from "@/app/lib/DeliveryBoy";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
+export async function GET() {
+  try {
+    await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+    const data = await deliverySchema.find();
+    return NextResponse.json({ result: data });
+  } catch (error) {
+    console.error('Error fetching delivery boys:', error);
+    return NextResponse.json({ message: 'Error fetching delivery boys', success: false });
+  }
+}
+
+
 export async function POST(request) {
     async function connectToDatabase() {
         if (!mongoose.connection.readyState) {
