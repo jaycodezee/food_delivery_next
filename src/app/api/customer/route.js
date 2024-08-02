@@ -3,9 +3,7 @@ import { restaurantSchema } from "@/app/lib/restaurant";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
-
 export async function GET(request) {
-
   let queryParams = request.nextUrl.searchParams;
   let filter = {};
 
@@ -18,26 +16,21 @@ export async function GET(request) {
       filter = { restaurantName: { $regex: new RegExp(name, "i") } };
     }
 
-    // Check if the client is already connected
-    async function connectToDatabase() {
-      if (!mongoose.connection.readyState) {
-        // console.log('helo :>> ');
-          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
-      }
-  }
-  
-
-  await connectToDatabase()
+    if (mongoose.connection.readyState === 0) {
+      await mongoose.connect(connectionStr, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+    }
 
     let result = await restaurantSchema.find(filter);
-    // console.log("Result:", result); 
 
-    return NextResponse.json({ success: true, result });
+    return NextResponse.json({ success: true, result }, { status: 200 });
   } catch (error) {
     console.error("Error fetching restaurants:", error);
-    return NextResponse.json({ success: false, message: "Failed to fetch data" });
-  } finally {
-
-    // await mongoose.disconnect();
+    return NextResponse.json(
+      { success: false, message: "Failed to fetch data" },
+      { status: 500 }
+    );
   }
 }

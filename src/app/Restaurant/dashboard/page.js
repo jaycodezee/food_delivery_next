@@ -5,7 +5,7 @@ import RestaurantHeader from "../../_componet/Header";
 import { useState } from "react";
 import AddFoodItems from '@/app/_componet/AddFoodItem';
 import FoodItemList from '@/app/_componet/FoodItemList'
-import useAuth from '../../_hooks/useAuth';
+import useAuth from '../../_hooks/restaurantAuth';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 
