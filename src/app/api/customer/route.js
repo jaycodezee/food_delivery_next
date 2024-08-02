@@ -3,9 +3,9 @@ import { restaurantSchema } from "@/app/lib/restaurant";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
-let isConnected = false;
 
 export async function GET(request) {
+
   let queryParams = request.nextUrl.searchParams;
   let filter = {};
 

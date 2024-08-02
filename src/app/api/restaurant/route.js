@@ -3,8 +3,6 @@ import { NextResponse } from "next/server";
 import { restaurantSchema } from "@/app/lib/restaurant";
 import { foodSchema } from "@/app/lib/food";
 import { connectionStr } from "@/app/lib/db";
-import jwt from 'jsonwebtoken'; 
-require('dotenv').config();
 
 export async function GET() {
     await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
