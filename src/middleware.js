@@ -6,7 +6,7 @@ import { Redis } from "@upstash/redis";
 
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(4, "10s"),
+  limiter: Ratelimit.slidingWindow(8, "10s"),
 });
 
 export const middleware = async (request) =>{

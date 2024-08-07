@@ -6,7 +6,7 @@ const FoodItemSchema = new mongoose.Schema({
   // Other fields
 });
 
-const FoodItem = mongoose.models.FoodItem || mongoose.model('FoodItem', FoodItemSchema);
+ const FoodItem = mongoose.models.FoodItems || mongoose.model('FoodItem', FoodItemSchema);
 
 // Define the User schema
 const UserSchema = new mongoose.Schema({

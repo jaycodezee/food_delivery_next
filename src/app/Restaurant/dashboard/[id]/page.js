@@ -76,8 +76,10 @@ const EditFoodItems = (props) => {
     };
 
     return (
-        <div className='container'>
+        <>
             <RestaurantHeader />
+        <div className='container'>
+            <title>Edit Food Item</title>
             <h1>Edit Food Item</h1>
             <div className='input-wrapper'>
                 <input
@@ -130,6 +132,7 @@ const EditFoodItems = (props) => {
             <button className="button" onClick={() => router.push('../dashboard')}>Back To Food Item </button>
         </div>
         </div>
+        </>
     );
 };
 

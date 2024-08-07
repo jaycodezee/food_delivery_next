@@ -23,7 +23,7 @@ const FoodItemList = () => {
             if (response.success) {
                 setFoodItems(response.result);
             } else {
-                alert("Food item list failed to load");
+                console.log("Food item list failed to load");
             }
         } catch (error) {
             console.error("Error loading food items:", error);
@@ -42,8 +42,9 @@ const FoodItemList = () => {
                 if (restaurantData) {
                     loadFoodItems(restaurantData._id);
                 }
+                alert("delete...")
             } else {
-                alert("Failed to delete food item");
+                console.log("Failed to delete food item");
             }
         } catch (error) {
             console.error("Error deleting food item:", error);

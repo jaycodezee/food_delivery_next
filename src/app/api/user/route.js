@@ -5,15 +5,17 @@ import { userSchema } from "@/app/lib/userModel";
 import { validateEmail } from "@/app/lib/validateEmail";
 
 
-async function connectToDatabase() {
-    if (mongoose.connection.readyState === 0) {
-        await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
-    }
-}
 
 export async function GET() {
     try {
-        await connectToDatabase();
+        async function connectToDatabase() {
+            if (!mongoose.connection.readyState) {
+                await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+            }
+        }
+        
+        await connectToDatabase()
+
         const data = await userSchema.find();
         return NextResponse.json({ result: data }, { status: 200 });
     } catch (error) {
@@ -30,7 +32,13 @@ export async function POST(request) {
             return NextResponse.json({ success: false, message: "Invalid email format" }, { status: 400 });
         }
 
-        await connectToDatabase();
+        async function connectToDatabase() {
+            if (!mongoose.connection.readyState) {
+                await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+            }
+        }
+        
+        await connectToDatabase()
 
 
         const existingUser = await userSchema.findOne({ email: payload.email });

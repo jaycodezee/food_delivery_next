@@ -20,7 +20,7 @@ const DeliveryBoySignup = () => {
     // console.log('data :>> ', data);
     if (data.success) {
       setMessage('Signup successful!');
-      router.push('/deliverypartner');
+      router.push('/');
     } else {
       setMessage(`Error: ${data.message}`);
     }
@@ -40,6 +40,7 @@ const DeliveryBoySignup = () => {
             placeholder="Username"
             value={username}
             onChange={e => setUsername(e.target.value)}
+            required
           />
         </div>
         <div className={styles.inputGroup}>
@@ -51,6 +52,7 @@ const DeliveryBoySignup = () => {
             placeholder="Email"
             value={email}
             onChange={e => setEmail(e.target.value)}
+            required
           />
         </div>
         <div className={styles.inputGroup}>
@@ -62,6 +64,7 @@ const DeliveryBoySignup = () => {
             placeholder="Password"
             value={password}
             onChange={e => setPassword(e.target.value)}
+            required
           />
         </div>
         <button className={styles.button} onClick={handleSignup}>Signup</button>

@@ -14,8 +14,8 @@ function Page() {
     const fetchOrders = async () => {
       const response = await fetch('/api/orders');
       const data = await response.json();
-      console.log('data :>> ', orders);
       if (data.success) {
+        console.log('data :>> ', data.orders);
         setOrders(data.orders); 
       } else {
         setMessage('Error fetching orders');

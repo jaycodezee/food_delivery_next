@@ -6,10 +6,13 @@ import { validateEmail } from "@/app/lib/validateEmail";
 
 export async function GET() {
   try {
-    await mongoose.connect(connectionStr, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
     const data = await deliverySchema.find();
     return NextResponse.json({ result: data }, { status: 200 });
   } catch (error) {
@@ -24,14 +27,11 @@ export async function GET() {
 export async function POST(request) {
   async function connectToDatabase() {
     if (!mongoose.connection.readyState) {
-      await mongoose.connect(connectionStr, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+        await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
     }
-  }
+}
 
-  await connectToDatabase();
+await connectToDatabase()
 
   const payload = await request.json();
   let success = false;

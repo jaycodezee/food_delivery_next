@@ -4,21 +4,19 @@ import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 // Function to connect to the database
-async function connectToDatabase() {
-  if (!mongoose.connection.readyState) {
-    await mongoose.connect(connectionStr, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-  }
-}
 
 export async function GET(request, content) {
   const id = content.params.id;
   let success = false;
-
+  
   try {
-    await connectToDatabase();
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
     const result = await foodSchema.findOne({ _id: id });
 
     if (result) {
@@ -48,7 +46,13 @@ export async function PUT(request, content) {
   let success = false;
 
   try {
-    await connectToDatabase();
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
     const result = await foodSchema.findOneAndUpdate({ _id: id }, payload, {
       new: true,
     });

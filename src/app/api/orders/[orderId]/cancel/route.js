@@ -11,14 +11,11 @@ export async function POST(request, { params }) {
 
   async function connectToDatabase() {
     if (!mongoose.connection.readyState) {
-      await mongoose.connect(connectionStr, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+        await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
     }
-  }
+}
 
-  await connectToDatabase();
+await connectToDatabase()
 
   try {
     const order = await Order.findByIdAndUpdate(

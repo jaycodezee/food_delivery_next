@@ -5,18 +5,17 @@ import { foodSchema } from "@/app/lib/food";
 import { connectionStr } from "@/app/lib/db";
 import { validateEmail } from "@/app/lib/validateEmail";
 
-async function connectToDatabase() {
-  if (mongoose.connection.readyState === 0) {
-    await mongoose.connect(connectionStr, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-  }
-}
 
 export async function GET() {
   try {
-    await connectToDatabase();
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
+
     const data = await restaurantSchema.find();
     return NextResponse.json({ result: data });
   } catch (error) {
@@ -30,7 +29,14 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    await connectToDatabase();
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
+
     const payload = await request.json();
     let result;
     let success = false;
@@ -80,7 +86,14 @@ export async function POST(request) {
 
 export async function DELETE(req) {
   try {
-    await connectToDatabase();
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
+  
     const { _id } = await req.json();
 
     const result = await restaurantSchema.findByIdAndDelete(_id);

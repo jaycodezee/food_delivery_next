@@ -10,4 +10,4 @@ const userModel= new mongoose.Schema({
     mobile:String
 })
 
-export const userSchema= mongoose.models.users || mongoose.model('users',userModel);
+export const userSchema= mongoose.models.users || mongoose.model('user',userModel);

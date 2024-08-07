@@ -4,22 +4,18 @@ import { connectionStr } from "@/app/lib/db";
 import { userSchema } from "@/app/lib/userModel";
 import { validateEmail } from "@/app/lib/validateEmail";
 
-// Utility function to connect to the database
-async function connectToDatabase() {
-  if (mongoose.connection.readyState === 0) {
-    await mongoose.connect(connectionStr, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-  }
-}
 
 export async function POST(request) {
   try {
     const payload = await request.json();
 
-    // Connect to the database
-    await connectToDatabase();
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
 
     // Validate email format
     if (!validateEmail(payload.email)) {

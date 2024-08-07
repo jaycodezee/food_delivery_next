@@ -7,14 +7,11 @@ import { validateEmail } from "@/app/lib/validateEmail";
 export async function POST(request) {
   async function connectToDatabase() {
     if (!mongoose.connection.readyState) {
-      await mongoose.connect(connectionStr, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+        await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
     }
-  }
+}
 
-  await connectToDatabase();
+await connectToDatabase()
 
   const payload = await request.json();
   let success = false;

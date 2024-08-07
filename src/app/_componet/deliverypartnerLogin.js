@@ -19,7 +19,7 @@ const DeliveryBoyLogin = () => {
     // console.log('data :>> ', data);
     if (data.success) {
       localStorage.setItem('deliveryBoy', JSON.stringify(data.result));
-      setMessage('Login successful!');
+      setMessage('Login successful! wait for ');
       router.push('/deliverypartner/dashboard');
     } else {
       setMessage(`Error: ${data.message}`);

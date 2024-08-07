@@ -68,6 +68,7 @@ const ProfilePage = () => {
     <div>
       <CustomerHeader />
       <main className={styles.profileContainer}>
+        <title>Your Profile</title>
         <h1>Your Orders</h1>
         {orders.length === 0 ? (
           <p>You have no orders.</p>

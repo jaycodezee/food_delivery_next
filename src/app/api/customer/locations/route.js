@@ -5,10 +5,13 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    await mongoose.connect(connectionStr, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
 
     let result = await restaurantSchema.find();
 

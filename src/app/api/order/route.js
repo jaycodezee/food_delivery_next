@@ -5,10 +5,13 @@ import { connectionStr } from "@/app/lib/db";
 
 export async function GET(req) {
   try {
-    await mongoose.connect(connectionStr, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
 
     const userId = req.nextUrl.searchParams.get("id");
 
@@ -37,12 +40,14 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
-    const { user_id, foodItemIds, resto_id, deliveryBoy_id, amount } =
-      await req.json();
-    await mongoose.connect(connectionStr, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const { user_id, foodItemIds, resto_id, deliveryBoy_id, amount } = await req.json();
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
 
     const order = new Order({
       user_id: new mongoose.Types.ObjectId(user_id),

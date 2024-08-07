@@ -2,28 +2,24 @@ import { connectionStr } from "@/app/lib/db";
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import Order from "@/app/lib/Order";
-import FoodItem from "@/app/lib/food";
+import FoodItem from "@/app/lib/Order";
 
 export async function GET() {
-  await mongoose.connect(connectionStr, { useNewUrlParser: true });
 
   async function connectToDatabase() {
     if (!mongoose.connection.readyState) {
-      await mongoose.connect(connectionStr, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+        await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
     }
-  }
+}
 
-  await connectToDatabase();
+await connectToDatabase()
 
   try {
     const orders = await Order.find({})
       .populate({ path: "user_id", select: "name mobile address" })
       .populate({
-        path: "foodItemIds",
-        select: "name ",
+        path: "FoodItemIds",
+        select: "name img_path",
       })
       .exec();
 

@@ -74,7 +74,7 @@ export default function Home() {
             type="text"
             className={styles.searchinput}
             onChange={(event) => loadRestaurants({ restaurant: event.target.value })} // Add onChange handler
-            placeholder="Enter Location or Restaurant name"
+            placeholder="Enter Restaurant name"
           />
         </div>
       </div>

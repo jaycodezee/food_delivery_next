@@ -13,5 +13,4 @@ const restaurantModel = new mongoose.Schema({
     restaurantContact: Number,
 });
 
-export const restaurantSchema = mongoose.models.new
-    || mongoose.model("new", restaurantModel);
+export const restaurantSchema = mongoose.models.restaurants || mongoose.model("restaurant", restaurantModel);

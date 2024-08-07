@@ -6,4 +6,4 @@ const deliveryBoySchema = new mongoose.Schema({
   password: { type: String, required: true },
 });
 
-export const deliverySchema = mongoose.models.DeliveryBoy || mongoose.model('deliveryboys', deliveryBoySchema);
+export const deliverySchema = mongoose.models.deliveryboys || mongoose.model('deliveryboy', deliveryBoySchema);

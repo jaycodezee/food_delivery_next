@@ -32,20 +32,16 @@ const validateFoodData = (data) => {
   return errors;
 };
 
-// Function to connect to the database
-async function connectToDatabase() {
-  if (mongoose.connection.readyState === 0) {
-    await mongoose.connect(connectionStr, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-  }
-}
-
-// GET handler to fetch all food items
 export async function GET() {
   try {
-    await connectToDatabase();
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
+
     const foods = await foodSchema.find();
     return NextResponse.json({ result: foods }, { status: 200 });
   } catch (error) {
@@ -60,7 +56,14 @@ export async function GET() {
 // POST handler to create a new food item
 export async function POST(request) {
   try {
-    await connectToDatabase();
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      }
+  }
+  
+  await connectToDatabase()
+
     const payload = await request.json();
     const validationErrors = validateFoodData(payload);
 
