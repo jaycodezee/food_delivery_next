@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import styles from '../styles/Profile.module.css'; 
 import { useRouter } from 'next/navigation';
 import CustomerHeader from "../_componet/CustmoreHeader";
-import { useAuth } from '../_hooks/userAuth';
+import { useAuth } from '@/app/_hooks/userAuth';
 import {Spinner} from "@nextui-org/react";
 
 const ProfilePage = () => {

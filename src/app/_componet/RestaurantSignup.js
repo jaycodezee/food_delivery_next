@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import styles from '../styles/Signup.module.css';
+import styles from '../styles/signup.module.css';
 import { useRouter } from "next/navigation";
 
 const Signup = ({ onSignupSuccess }) => {
