@@ -3,11 +3,9 @@ import { useState, useEffect } from 'react';
 import styles from '../styles/Profile.module.css'; 
 import { useRouter } from 'next/navigation';
 import CustomerHeader from "../_componet/CustmoreHeader";
-import { useAuth } from '@/app/_hooks/userAuth';
 import {Spinner} from "@nextui-org/react";
 
 const ProfilePage = () => {
-  useAuth()
   const [orders, setOrders] = useState([]);
   const [foodItems, setFoodItems] = useState({});
   const [loading, setLoading] = useState(true);
@@ -17,12 +15,13 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        // Retrieve userId from local storage
         const user =  JSON.parse(localStorage.getItem('userdata'));
-        // console.log('user', user)
         const userId = user._id;
         if (!userId) {
           throw new Error('User ID not found');
+        }
+        if (!userData) {
+          router.push('/user');
         }
 
         const response = await fetch('/api/order?id='+userId);
