@@ -10,7 +10,6 @@ import Head from 'next/head';
 const CartPage = () => {
   const { cartItems, cartNumber, removeFromCart } = useCart();
   const [paymentMethod, setPaymentMethod] = useState('card');
-  const [userData, setUserData] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -41,33 +40,89 @@ const CartPage = () => {
       </Head>
       <main className={styles.cartContainer}>
         <CustomerHeader />
-        <h1>Shopping Cart</h1>
+        <h1 className={styles.h1}>Shopping Cart</h1>
         {cartNumber === 0 ? (
           <p>Your cart is empty.</p>
         ) : (
-          <div className={styles.cartList}>
-            {cartItems.map(item => (
-              <div key={item._id} className={styles.cartItem}>
-                <img src={item.img_path} alt={item.name} className={styles.cartItemImage} />
-                <div className={styles.cartItemDetails}>
-                  <h2 className={styles.cartItemName}>{item.name}</h2>
-                  <p className={styles.cartItemPrice}>₹{item.price.toFixed(2)}</p>
-                  <button
-                    className={styles.removeButton}
-                    onClick={() => handleRemoveFromCart(item._id)}
-                  >
-                    Remove
-                  </button>
+          <>
+            <div className={styles.cartList}>
+              {cartItems.map(item => (
+                <div key={item._id} className={styles.cartItem}>
+                  <img src={item.img_path} alt={item.name} className={styles.cartItemImage} />
+                  <div className={styles.cartItemDetails}>
+                    <h2 className={styles.cartItemName}>{item.name}</h2>
+                    <p className={styles.cartItemPrice}>₹{item.price.toFixed(2)}</p>
+                    <button
+                      className={styles.removeButton}
+                      onClick={() => handleRemoveFromCart(item._id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
+              ))}
+            </div>
+
+            <div className={styles.totalAmountContainer}>
+              <h2>Order Summary</h2>
+              <div className={styles.orderAmount}>
+                <span>Order Amount:</span>
+                <span>₹{orderAmount.toFixed(2)}</span>
               </div>
-            ))}
+              <div className={styles.deliveryCharge}>
+                <span>Delivery Charge:</span>
+                <span>₹{deliveryCharge.toFixed(2)}</span>
+              </div>
+              <div className={styles.gstAmount}>
+                <span>GST (18%):</span>
+                <span>₹{gstAmount.toFixed(2)}</span>
+              </div>
+              <div className={styles.totalAmount}>
+                <span>Total Amount:</span>
+                <span>₹{totalAmount.toFixed(2)}</span>
+              </div>
+            </div>
+
+            <div className={styles.paymentMethodContainer}>
+              <h2>Choose Payment Method</h2>
+              <div className={styles.paymentMethods}>
+                <label>
+                  <input
+                    type="radio"
+                    value="card"
+                    checked={paymentMethod === 'card'}
+                    onChange={handlePaymentMethodChange}
+                  />
+                  Card
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="paypal"
+                    checked={paymentMethod === 'paypal'}
+                    onChange={handlePaymentMethodChange}
+                  />
+                  PayPal
+                </label>
+                <label>
+                  <input
+                    type="radio"
+                    value="cod"
+                    checked={paymentMethod === 'cod'}
+                    onChange={handlePaymentMethodChange}
+                  />
+                  Cash on Delivery
+                </label>
+              </div>
+            </div>
+
             <Payment
               cartItems={cartItems}
               totalAmount={totalAmount}
               paymentMethod={paymentMethod}
-              removeFromCart={removeFromCart}  
+              removeFromCart={removeFromCart}
             />
-          </div>
+          </>
         )}
       </main>
     </>
