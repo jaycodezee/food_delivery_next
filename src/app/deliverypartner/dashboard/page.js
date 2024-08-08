@@ -15,7 +15,7 @@ function Page() {
       const response = await fetch('/api/orders');
       const data = await response.json();
       if (data.success) {
-        // console.log('data :>> ', data.orders);
+        console.log('data :>> ', data.orders);
         setOrders(data.orders); 
       } else {
         setMessage('Error fetching orders');
@@ -55,6 +55,11 @@ function Page() {
     }
   };
 
+  const formatDate = (dateString) => {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  };
+
   return (
     <div>
       <DeliveryHeader />
@@ -69,11 +74,11 @@ function Page() {
             orders.map(order => (
               <div key={order._id} className={styles.order}>
                 <p>Order ID: {order._id}</p>
-                <br />
                 <p>Customer: {order.user_id?.name || 'Unknown'}</p>
                 <p>Mobile: {order.user_id?.mobile || 'Unknown'}</p>
                 <p>Address: {order.user_id?.address || 'Unknown'}</p>
                 <p>Status: {order.status}</p>
+                <p>Order Time: {formatDate(order.updatedAt)}</p>
                 <div>
                   <h3>Food Items:</h3>
                   <ul>
