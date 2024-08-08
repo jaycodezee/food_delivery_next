@@ -13,7 +13,7 @@ export async function GET() {
   }
   
   await connectToDatabase()
-    const data = await deliverySchema.find();
+    const data = await deliverySchema.find({}, { _id: 1, username: 1, email: 1 });
     return NextResponse.json({ result: data }, { status: 200 });
   } catch (error) {
     console.error("Error fetching delivery boys:", error);

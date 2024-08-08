@@ -25,7 +25,15 @@ await connectToDatabase()
       filter = { restaurantName: { $regex: new RegExp(name, "i") } };
     }
 
-    let result = await restaurantSchema.find(filter);
+    let result = await restaurantSchema.find(filter, {
+      _id: 1,
+      ownerName: 1,
+      restaurantName: 1,
+      email: 1,
+      city: 1,
+      address: 1,
+      pinCode: 1
+    });
     // console.log("Result:", result); 
 
     return NextResponse.json({ success: true, result });
