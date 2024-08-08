@@ -9,13 +9,13 @@ function Page() {
   const [orders, setOrders] = useState([]);
   const [message, setMessage] = useState('');
   const authenticated = deliveryAuth();
-  
+
   useEffect(() => {
     const fetchOrders = async () => {
       const response = await fetch('/api/orders');
       const data = await response.json();
       if (data.success) {
-        console.log('data :>> ', data.orders);
+        // console.log('data :>> ', data.orders);
         setOrders(data.orders); 
       } else {
         setMessage('Error fetching orders');
@@ -24,12 +24,11 @@ function Page() {
 
     fetchOrders();
   }, []);
-  
-  
-    if (!authenticated) {
-        return null; 
-    }
-    
+
+  if (!authenticated) {
+    return null; 
+  }
+
   const handleAcceptOrder = async (orderId) => {
     const response = await fetch(`/api/orders/${orderId}/accept`, {
       method: 'POST',
@@ -80,7 +79,10 @@ function Page() {
                   <ul>
                     {order.foodItemIds?.length > 0 ? (
                       order.foodItemIds.map(foodItem => (
-                        <li key={foodItem._id}>{foodItem.name}</li>
+                        <li key={foodItem._id} className={styles.foodItem}>
+                          <img src={foodItem.img_path} alt={foodItem.name} className={styles.foodImage} />
+                          {foodItem.name}
+                        </li>
                       ))
                     ) : (
                       <li>No food items</li>

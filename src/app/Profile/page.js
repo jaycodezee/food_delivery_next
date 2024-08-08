@@ -20,7 +20,7 @@ const ProfilePage = () => {
         if (!userId) {
           throw new Error('User ID not found');
         }
-        if (!userData) {
+        if (!user) {
           router.push('/user');
         }
 

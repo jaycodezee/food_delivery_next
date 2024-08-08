@@ -65,3 +65,17 @@
     font-size: 0.875rem;
     margin-top: 0.5rem;
 }
+
+.foodItem {
+    display: flex;
+    align-items: center;
+}
+
+.foodImage {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+
+}
