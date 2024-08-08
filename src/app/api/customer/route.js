@@ -32,7 +32,8 @@ await connectToDatabase()
       email: 1,
       city: 1,
       address: 1,
-      pinCode: 1
+      pinCode: 1,
+      restaurantContact:1
     });
     // console.log("Result:", result); 
 
