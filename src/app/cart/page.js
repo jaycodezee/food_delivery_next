@@ -82,40 +82,6 @@ const CartPage = () => {
                 <span>₹{totalAmount.toFixed(2)}</span>
               </div>
             </div>
-
-            <div className={styles.paymentMethodContainer}>
-              <h2>Choose Payment Method</h2>
-              <div className={styles.paymentMethods}>
-                <label>
-                  <input
-                    type="radio"
-                    value="card"
-                    checked={paymentMethod === 'card'}
-                    onChange={handlePaymentMethodChange}
-                  />
-                  Card
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="paypal"
-                    checked={paymentMethod === 'paypal'}
-                    onChange={handlePaymentMethodChange}
-                  />
-                  PayPal
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    value="cod"
-                    checked={paymentMethod === 'cod'}
-                    onChange={handlePaymentMethodChange}
-                  />
-                  Cash on Delivery
-                </label>
-              </div>
-            </div>
-
             <Payment
               cartItems={cartItems}
               totalAmount={totalAmount}
