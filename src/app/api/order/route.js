@@ -7,7 +7,7 @@ export async function GET(req) {
   try {
     async function connectToDatabase() {
       if (!mongoose.connection.readyState) {
-          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+          await mongoose.connect(connectionStr, { useUnifiedTopology: true });
       }
   }
   
@@ -43,7 +43,7 @@ export async function POST(req) {
     const { user_id, foodItemIds, resto_id, deliveryBoy_id, amount } = await req.json();
     async function connectToDatabase() {
       if (!mongoose.connection.readyState) {
-          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+          await mongoose.connect(connectionStr, { useUnifiedTopology: true });
       }
   }
   

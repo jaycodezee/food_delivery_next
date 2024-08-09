@@ -5,13 +5,13 @@ import Order from "@/app/lib/Order";
 export async function POST(request, { params }) {
   const { orderId } = params;
   await mongoose.connect(connectionStr, {
-    useNewUrlParser: true,
+   
     useUnifiedTopology: true,
   });
 
   async function connectToDatabase() {
     if (!mongoose.connection.readyState) {
-        await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(connectionStr, { useUnifiedTopology: true });
     }
 }
 

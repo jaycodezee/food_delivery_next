@@ -8,7 +8,7 @@ export async function GET() {
   try {
     async function connectToDatabase() {
       if (!mongoose.connection.readyState) {
-          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+          await mongoose.connect(connectionStr, { useUnifiedTopology: true });
       }
   }
   
@@ -27,7 +27,7 @@ export async function GET() {
 export async function POST(request) {
   async function connectToDatabase() {
     if (!mongoose.connection.readyState) {
-        await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+        await mongoose.connect(connectionStr, { useUnifiedTopology: true });
     }
 }
 
@@ -35,7 +35,7 @@ await connectToDatabase()
 
   const payload = await request.json();
   let success = false;
-  await mongoose.connect(connectionStr, { useNewUrlParser: true });
+  await mongoose.connect(connectionStr, {  });
   if (!validateEmail(payload.email)) {
     return NextResponse.json(
       { success: false, message: "Invalid email format" },

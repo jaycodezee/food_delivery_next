@@ -8,7 +8,7 @@ import { User } from "@/app/lib/userModel";
 export async function GET() {
   async function connectToDatabase() {
     if (!mongoose.connection.readyState) {
-      await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+      await mongoose.connect(connectionStr, { useUnifiedTopology: true });
     }
   }
 

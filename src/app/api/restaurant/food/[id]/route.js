@@ -12,7 +12,7 @@ export async function GET(request, content) {
   try {
     async function connectToDatabase() {
       if (!mongoose.connection.readyState) {
-          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+          await mongoose.connect(connectionStr, { useUnifiedTopology: true });
       }
   }
   
@@ -43,7 +43,7 @@ export async function DELETE(request, content) {
   try {
     async function connectToDatabase() {
       if (!mongoose.connection.readyState) {
-          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+          await mongoose.connect(connectionStr, { useUnifiedTopology: true });
       }
   }
   

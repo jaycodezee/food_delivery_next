@@ -7,7 +7,7 @@ export async function POST(req) {
   try {
     async function connectToDatabase() {
       if (!mongoose.connection.readyState) {
-          await mongoose.connect(connectionStr, { useNewUrlParser: true, useUnifiedTopology: true });
+          await mongoose.connect(connectionStr, { useUnifiedTopology: true });
       }
   }
   

@@ -9,7 +9,7 @@ export async function GET() {
     async function connectToDatabase() {
       if (!mongoose.connection.readyState) {
         await mongoose.connect(connectionStr, {
-          useNewUrlParser: true,
+         
           useUnifiedTopology: true,
         });
       }
@@ -52,7 +52,7 @@ export async function POST(request) {
     async function connectToDatabase() {
       if (!mongoose.connection.readyState) {
         await mongoose.connect(connectionStr, {
-          useNewUrlParser: true,
+         
           useUnifiedTopology: true,
         });
       }
