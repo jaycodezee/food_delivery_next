@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { CartProvider } from './_componet/CartContext'; 
 import { Analytics } from "@vercel/analytics/react" 
 const inter = Inter({ subsets: ["latin"] });
+import MyFooter from './_componet/MyFooter'
 
 export default function RootLayout({ children }) {
   return (
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
         <CartProvider>
           {children}
         </CartProvider>
+        <MyFooter/>
       </body>
     </html>
   );

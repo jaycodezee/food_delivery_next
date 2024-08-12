@@ -60,7 +60,16 @@ const Footer = () => {
                 </form>
             </div>
             <div className={styles.copyRight}>
-                &copy; {new Date().getFullYear()} Restaurant Name. All rights reserved.
+            &copy; {new Date().getFullYear()}{" "}
+              <a
+                href="https://jaykyada.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="highlight"
+              >
+                kyada jay.
+              </a>
+              All Rights Reserved..
             </div>
         </footer>
     );

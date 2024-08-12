@@ -99,6 +99,9 @@
     font-size: 0.9rem;
     color: #bbb;
 }
+.copyRight a{
+    color: #fff;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
