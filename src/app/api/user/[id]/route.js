@@ -1,12 +1,22 @@
 import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import {userSchema} from '@/app/lib/userModel';  
+import { connectionStr } from "@/app/lib/db";
 
 export async function GET(req, { params }) {
   const { id } = params;
 
   try {
-    await mongoose.connect(process.env.MONGODB_URI);
+    async function connectToDatabase() {
+      if (!mongoose.connection.readyState) {
+        await mongoose.connect(connectionStr, {
+         
+          useUnifiedTopology: true,
+        });
+      }
+    }
+
+    await connectToDatabase();
     const user = await userSchema.findById(id);
     if (user) {
       return NextResponse.json({ success: true, user });
